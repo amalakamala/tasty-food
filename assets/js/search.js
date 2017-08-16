@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$('#select-city').on('change',function(){
-		var ciudad = "'"+ $('#select-city').val() +"'";
+		var ciudad =  $('#select-city').val() ;
 		console.log(ciudad);
 		var cousine = "italian";
 		var apiKey = '6cc3db9f6f73c4a770e8ddde5284d1fb'; 
@@ -23,10 +23,10 @@ $(document).ready(function() {
 	    	})
 	    	.done(function(response){
 	    		//console.log(response);
+	    		$('.imprime').empty();
 	    		response.restaurants.forEach(function(e){
-	    			//$('.imprime').empty();
 	    			//console.log(e.restaurant); 
-	    			//console.log(e.restaurant.name); 
+	    			console.log(e.restaurant.name); 
 	    			$('.imprime').append(`<p>${e.restaurant.name}</p>`);
 	    		});
 	    	})
