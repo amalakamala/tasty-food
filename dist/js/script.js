@@ -10255,3 +10255,6 @@ return jQuery;
 $(document).ready(function() {
 
 });
+$(document).ready(function() {
+	$(".button-collapse").sideNav();
+});

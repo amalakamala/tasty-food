@@ -1,0 +1,23 @@
+nav{
+	height: 39px;
+	.button-back-page{
+		height: auto;
+		padding-left: 20px;
+		.icon-back-page{
+			font-size: x-large;
+		}
+	}
+	.name-page-nav{
+		height: auto;
+		width: 100px;
+		font-size: large;
+		font-weight: 600;
+		margin-left: 22%;
+	}
+	.buttom-enlaces-nav{
+		margin-left: 20%;
+		.icon-enlaces-nav{
+			font-size: x-large;
+		}
+	}
+}
