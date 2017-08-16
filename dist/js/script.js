@@ -10253,5 +10253,9 @@ return jQuery;
 } );
 
 $(document).ready(function() {
+<<<<<<< HEAD
 	alert("hola mundo");
+=======
+
+>>>>>>> 8fb44cd1b588c6060bcd2dd42d547a7786bfdf79
 });
