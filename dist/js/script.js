@@ -10268,6 +10268,8 @@ $(document).ready(function() {
                return false;
         }else{
             $("#mensaje").fadeOut();
+            localStorage.setItem('nom', nombre);
+            console.log(nombre);
         }
 
         if(email == "" || !correo.test(email)){
@@ -10275,6 +10277,8 @@ $(document).ready(function() {
                return false;
         }else{
             $("#mensaje1").fadeOut();
+            localStorage.setItem('correo', email);
+            console.log(email);
         }
 
         if(pass == "" || !contra.test(pass)){
@@ -10282,9 +10286,20 @@ $(document).ready(function() {
                return false;
         }else{
             $("#mensaje2").fadeOut();
+            localStorage.setItem('contra', pass);
+            console.log(pass);
         } 
 
         return true; 
+
+        $("#name").val(""); 
+		$("#email").val("");
+        $("#password").val("");
 	})
 
+	/*local storage*/
+	var nombre2 = localStorage.getItem('nom');
+	var email2 = localStorage.getItem('correo');
+	var pass2 = localStorage.getItem('contra');
+	
 });
