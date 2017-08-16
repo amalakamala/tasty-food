@@ -20253,12 +20253,8 @@ if (jQuery) {
   };
 })(jQuery);
 
+
 $(document).ready(function() {
-
-
-});
-$(document).ready(function() {
-
 	$('#select-city').on('change',function(){
 		var ciudad =  $('#select-city').val() ;
 		console.log(ciudad);
