@@ -1,0 +1,26 @@
+nav{
+	height: 39px;
+	.button-back-page{
+		height: auto;
+		padding-left: 20px;
+		.icon-back-page{
+			font-size: x-large;
+		}
+	}
+	.buttom-enlaces-nav{
+		margin-left: 75%;
+		.icon-enlaces-nav{
+			font-size: x-large;
+		}
+	}
+}
+.errores{
+   	background: red;
+   	color: white;
+   	display: none;
+   	font-size: 14px;
+   	margin-top: 10px;
+   	margin-left: 50px;
+   	padding: 5px;
+   	position: absolute;
+}

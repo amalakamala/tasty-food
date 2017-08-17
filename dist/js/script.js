@@ -10253,6 +10253,7 @@ return jQuery;
 } );
 
 $(document).ready(function() {
+    $(".button-collapse").sideNav();
 	/*Validación de cuenta*/
 	var correo = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 	var contra = /^[0-9]+(\.[0-9])?$/;
@@ -10303,3 +10304,4 @@ $(document).ready(function() {
 	var pass2 = localStorage.getItem('contra');
 	
 });
+
