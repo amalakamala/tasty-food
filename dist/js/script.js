@@ -20254,7 +20254,10 @@ if (jQuery) {
 })(jQuery);
 
 
+
 $(document).ready(function() {
+	$(".button-collapse").sideNav();
+
 	$('#select-city').on('change',function(){
 		var ciudad =  $('#select-city').val() ;
 		console.log(ciudad);
@@ -20295,4 +20298,5 @@ $(document).ready(function() {
 	        })				
 
 	});
+
 });
