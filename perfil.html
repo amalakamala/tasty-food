@@ -22,21 +22,34 @@
 			<a href="#" data-activates="mobile-demo" class="buttom-enlaces-nav button-collapse right"><i class="material-icons icon-enlaces-nav">dehaze</i></a>
 		</div>
 	</nav>
-	<section id="perfil-section" class="">
-			<!--cargar imagen-->
-		<div id="box">
-			<img src="#" class="perf_ima"/>
+	<section id="imagen-perfil-section" class="grey lighten-2 container-fluid">
+		<div class="row first-row-perfil">
+			<div class="col s12 first-column-perfil">
+				<!--cargar imagen-->
+				<div id="box">
+					<img src="#" class="perf_ima"/>
+				</div>
+				<button class="orange darken-3 white-text button-upload modal-trigger">Upload photo</button>
+				<div class="modal-upload">
+					<span class="errores" id="info">No hay archivo aún</span>
+						<form id="file-submit" enctype="multipart/form-data">
+							<input id="file" name="file" type="file"/>
+						</form>
+						<a href="#" class="btn orange darken-3" id="guardar">Guardar</a>
+				</div>	
+			</div>
 		</div>
-		<span class="errores" id="info">No hay archivo aún</span>
-		<form id="file-submit" enctype="multipart/form-data">
-			<input id="file" name="file" type="file"/>
-		</form>
-		<a href="#" class="btn" id="guardar">Guardar</a>
 	</section>
-	
+	<section id="perfil-section" class="grey lighten-2 container-fluid">
 	<!--Cajas contenedoras de los datos del usuario-->
-	<div class="box-a"></div>
-	<div class="box-b"></div>
+		<div class="row">
+			<div class="col s12 center">
+				<div class="box-a white"></div>
+				<div class="box-b white"></div>
+				<p class="title-favorites">FAVORITES</p>
+			</div>
+		</div>
+	</section>
 	<section><!--Acá va la parte de agregar -favoritos--></section>
 	<!--JS-->
 	<script src="dist/js/script.js"></script>
