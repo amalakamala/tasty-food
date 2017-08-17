@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $(".button-collapse").sideNav();
     /*Validación de creación de cuenta*/
     var nombreIngreso = /^([a-z]|[A-Z])+ ([a-z]|[A-Z])+$/;
     var correo = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/; //valido para cualquier correo
@@ -33,7 +34,7 @@ $(document).ready(function() {
             $("#mensaje2").fadeOut();
             localStorage.setItem('contra', pass);/*ingreso de datos al local storage*/
             console.log(pass);
-            $("#btn-crear").attr("href","login.html");
+            $("#btn-crear").attr("href","search.html");
         } 
         return true; 
         $("#name").val(""); 

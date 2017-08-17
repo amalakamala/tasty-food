@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	//$(".button-collapse").sideNav();
+	$(".button-collapse").sideNav();
 
 	$('#select-city').on('change',function(){
 		//La ciudad será variabla por eso se ingresa lo del select
