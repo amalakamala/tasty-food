@@ -14,6 +14,22 @@ nav{
 		}
 	}
 }
+#cuenta-section{
+	.first-column-cuenta{
+		.title-cuenta{
+			font-family: 'Teko', sans-serif;
+			font-weight: 900;
+			font-size: -webkit-xxx-large;
+			color: #ef6c00!important;
+			margin-top: 20%;
+			margin-bottom: 0;
+		}
+		.subtitle-cuenta{
+			margin-top: 0;
+			font-size: x-small;
+		}
+	}
+}
 .errores{
    	background: red;
    	color: white;
