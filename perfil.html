@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TastyFood</title>
+	<!-- ICON material -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto|Teko" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Fontawesome -->
+	<script src="https://use.fontawesome.com/b5fd719f9b.js"></script>
+	<!--favicon-->
+	<link rel="icon" href="dist/img/favicon.ico" type="image/x-icon"/>
+	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
+</head>
+<body>
+	<nav class="orange darken-3">
+		<div class="nav-wrapper valign-wrapper">
+			<a href="index.html" data-activates="mobile-demo" class="button-back-page"><i class="material-icons icon-back-page">arrow_back</i></a>
+			<h4 class="title-nav-perfil">PROFILE</h4>
+			<a href="#" data-activates="mobile-demo" class="buttom-enlaces-nav button-collapse right"><i class="material-icons icon-enlaces-nav">dehaze</i></a>
+		</div>
+	</nav>
+	<section id="imagen-perfil-section" class="grey lighten-2 container-fluid">
+		<div class="row first-row-perfil">
+			<div class="col s12 first-column-perfil">
+				<!--cargar imagen-->
+				<div id="box">
+					<img src="#" class="perf_ima"/>
+				</div>
+				<button class="orange darken-3 white-text button-upload modal-trigger">Upload photo</button>
+				<div class="modal-upload">
+					<span class="errores" id="info">No hay archivo aún</span>
+						<form id="file-submit" enctype="multipart/form-data">
+							<input id="file" name="file" type="file"/>
+						</form>
+						<a href="#" class="btn orange darken-3" id="guardar">Guardar</a>
+				</div>	
+			</div>
+		</div>
+	</section>
+	<section id="perfil-section" class="grey lighten-2 container-fluid">
+	<!--Cajas contenedoras de los datos del usuario-->
+		<div class="row">
+			<div class="col s12 center">
+				<div class="box-a white"></div>
+				<div class="box-b white"></div>
+				<p class="title-favorites">FAVORITES</p>
+			</div>
+		</div>
+	</section>
+	<section><!--Acá va la parte de agregar -favoritos--></section>
+	<!--JS-->
+	<script src="dist/js/script.js"></script>
+</body>
+</html>
