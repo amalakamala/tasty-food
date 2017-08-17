@@ -15,41 +15,67 @@
 	<link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
 </head>
 <body>
-	<!-- nav -->
-	<select class="browser-default" id="select-city">
-		<option value="83" selected>Santiago</option>
-		<option value="73">Río Janeiro</option>
-		<option value="67">Sao Paulo</option>
-		<option value="257">Roma</option>
-		<option value="280">New York</option>
-		<option value="97">Dublin</option>
-  	</select>
-	<section class="container">
+	<section class="container-fluid">
+        <nav class="orange darken-3">
+            <div class="nav-wrapper valign-wrapper">
+                <a href="#" data-activates="mobile-demo" class="button-back-page"><i class="material-icons icon-back-page">arrow_back</i></a>
+                <a href="#!" class="name-page-nav center-align">SEARCH</a>
+                <a href="#" data-activates="mobile-demo" class="buttom-enlaces-nav button-collapse right"><i class="material-icons icon-enlaces-nav">dehaze</i></a>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+	<!-- Select -->
+	<section class="select-buscador">
 		<div class="row">
-			<div class="col s4">
-				<img src="" alt="">
+			<div class="col s12">
+				<select class="browser-default" id="select-city">
+					<option value="" selected disabled>Seleccionar</option>
+					<option value="83">Santiago</option>
+					<option value="73">Río Janeiro</option>
+					<option value="67">Sao Paulo</option>
+					<option value="257">Roma</option>
+					<option value="280">New York</option>
+					<option value="91">Dublin</option>
+		  		</select>		
 			</div>
-			<div class="row">
-				<div class="col s4">
-					<img src="" alt="">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s4">
-					<img src="" alt="">
-				</div>
+		</div>	
+	</section>
+	<!-- Select Resultados -->
+	<section class="resultados-buscador">
+		<div class="row">
+			<div class="imprime"></div>
+				<!-- AQUÍ IMPRIME LA API -->
 			</div>
 		</div>
 	</section>
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div>
-					<h3><!-- nombre restaurant --></h3><span><a href=""><i class="fa fa-heart" aria-hidden="true"></i></a></span>
+	<footer id="imprimeFooter">
+		
+	</footer>
+<!-- 	<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<div class="titleFooter">
+					<h3>nombre restaurant</h3><span><a href=""><i class="fa fa-heart" aria-hidden="true"></i></a></span>
+				</div>
+				<div class="datosFooter center-align">
+					direccion
+					<h4>Adress</h4>
+					<p></p>
+					<h4>Price</h4>
+					<p></p>
+					<h4>Rating</h4>
+					<p></p>
 				</div>
 			</div>
 		</div>
-	</footer>
+	</div>
+</footer> -->
 		<div class="imprime"></div>
 	<!--JS-->
 	<script src="dist/js/script.js"></script>
