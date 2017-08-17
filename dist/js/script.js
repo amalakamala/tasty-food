@@ -20253,12 +20253,103 @@ if (jQuery) {
   };
 })(jQuery);
 
-
-
 $(document).ready(function() {
 	$(".button-collapse").sideNav();
+    /*Validación de creación de cuenta*/
+    var nombreIngreso = /^([a-z]|[A-Z])+ ([a-z]|[A-Z])+$/;
+    var correo = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/; //valido para cualquier correo
+    var contra = /^[a-zA-Z0-9.\-_$@*!]{3,20}$/;  //contraseña con num y letras max 20 dígitos
+    $(".crear").click(function(){         
+        var nombre = $("#name").val(); 
+        var email = $("#email").val();
+        var pass = $("#password").val();
+        /*Vane lo bkn de las expresiones regulares que por defecto si esta vacia
+        te tira que es incorrecta
+        */
+        if(!nombreIngreso.test(nombre)){
+           $("#mensaje").fadeIn("slow");           
+               return false;
+        }else{
+            $("#mensaje").fadeOut();
+            localStorage.setItem('nom', nombre);/*ingreso de datos al local storage*/
+            console.log(nombre);
+        }
+        if(!correo.test(email)){
+            $("#mensaje1").fadeIn("slow");
+               return false;
+        }else{
+            $("#mensaje1").fadeOut();
+            localStorage.setItem('correo', email);/*ingreso de datos al local storage*/
+            console.log(email);
+        }
+        if(!contra.test(pass)){
+            $("#mensaje2").fadeIn("slow");
+               return false;
+        }else{
+            $("#mensaje2").fadeOut();
+            localStorage.setItem('contra', pass);/*ingreso de datos al local storage*/
+            console.log(pass);
+            $("#btn-crear").attr("href","login.html");
+        } 
+        return true; 
+        $("#name").val(""); 
+        $("#email").val("");
+        $("#password").val("");
+    })
+    /*local storage*/
+    /*** Acá llamas local storage pero se puede poner de inmediato el el value de los input de cuenta ***/
+    var nombre2 = localStorage.getItem('nom'); /*llamada del los datos guardados en el local storage*/
+    var email2 = localStorage.getItem('correo'); /*llamada del los datos guardados en el local storage*/
+    var pass2 = localStorage.getItem('contra'); /*llamada del los datos guardados en el local storage*/
+    /*
+    Así puedes dejar pre llenado los campos de ingreso de login: 
+    $('#name2').val(localStorage.getItem('nom'));
+    $('#password2').val(localStorage.getItem('contra'));
+    */
+    /*Validación del login*/
+    $(".ingresar").click(function(){
+        var nuevoNom = $("#name2").val();
+        var nuevoPass = $("#password2").val();
+        if(nuevoNom != nombre2){
+             $("#mensaje3").fadeIn("slow");          
+               return false;
+        }else{
+            $("#mensaje3").fadeOut();
+            console.log(nuevoNom, nombre2);
+        } 
+        if(nuevoPass != pass2){
+             $("#mensaje4").fadeIn("slow");          
+               return false;
+        }else{
+            $("#mensaje4").fadeOut();
+            console.log(nuevoPass, pass2);
+        } 
+        return true;
+    })
+    /*Agregado de los datos en perfil*/
+    /* Se imprime por pantalla en el index llamado perfil, los datos del nombre y del correo del usuario en los div con clase
+    box-a y box-b*/
+    $(".box-a").append(nombre2);
+    $(".box-b").append(email2);
+    /**Parte de subir imagen**/
+    $('#seleccion').click(function(e){
+        e.preventDefault();    
+        $('#file').click();
+    })
+    $('input[type=file]').change(function(){
+        var file = (this.files[0]);
+        var reader = new FileReader();
+        $('#info').text('');
+        $('#info').text(file);
+        reader.onload = function(e){
+            $('#box img').attr('src', e.target.result);         
+        }
+        reader.readAsDataURL(this.files[0]);
+    })
+
 
 	$('#select-city').on('change',function(){
+		//La ciudad será variabla por eso se ingresa lo del select
 		var ciudad =  $('#select-city').val() ;
 		console.log(ciudad);
 		var cousine = "italian";
@@ -20269,25 +20360,111 @@ $(document).ready(function() {
 	    	$.ajax({
 	    		url:'https://developers.zomato.com/api/v2.1/search',
 	      		type: 'GET',
+	      		//beforeSend es para pasar la seguridad con el API
 	      		beforeSend: function(request) {
 					request.setRequestHeader("user-key", apiKey);
-					$('.imprime').empty();
 				},
 	      		dataType: 'json',
 	      		data:{
 	      			'entity_id' : ciudad,
-	      			'entity_type': 'city',
-	      			'cuisines' : cousine
+	      			'entity_type': 'city'
+	      			//'cuisines' : cousine
+	      			//'cuisines' esta comentado, porque deseo que me traiga todo indiferente el tipo.
+	      			
 	      		}
 	    	})
 	    	.done(function(response){
 	    		//console.log(response);
+	    		//.empty() me borra lo anterior para realizar una nueva busqueda
+	    		$('.imprime').empty();
 	    		response.restaurants.forEach(function(e){
-
 	    			//console.log(e.restaurant); 
-	    			console.log(e.restaurant.name); 
-	    			$('.imprime').append(`<p>${e.restaurant.name}</p>`);
+	    			//console.log(e.restaurant.name); 
+	    			$('.imprime').append(`
+						<div class="col s4 caja-resultados" id="${e.restaurant.id}">
+							<a href="#" class="footer-fixed" id="img-${e.restaurant.id}">
+								<img src="${e.restaurant.featured_image}" class="responsive-img" alt="">
+							</a>
+							<div class="texto-resultado">
+
+								<div class="row">
+									<div class="col s10 col-resultado">
+										<p class="nombre-rest">${e.restaurant.name}</p>
+									</div>
+									<div class="col s2 col-resultado">
+										<a href="#" id="btn-${e.restaurant.id}"><i class="fa fa-cutlery" aria-hidden="true"></i></a>
+									</div>
+								</div>	
+								<div class="row">
+									<div class="col s11 col-resultado">
+										<p class="nombre-ubicacion">${e.restaurant.location.locality}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+	    			`);
+
+	    			/* COMPARAR PRECIOS */
+	    			//ACÁ LLAMO POR EL ID
+	    			var abierto = false;
+					$('#btn-'+e.restaurant.id).click(function(){
+						 if (!abierto) {
+							$('.footer-comparacion').removeClass('hide');
+							$('#name-rest-uno').empty();
+							$('#name-rest-uno').append(`${e.restaurant.name}`);
+							$('#cocina-uno').empty();
+							$('#cocina-uno').append(`${e.restaurant.cuisines}`);
+							$('#costo-uno').empty();
+							$('#costo-uno').append(`${e.restaurant.average_cost_for_two}`);
+							$('#valor-uno').empty();
+							$('#valor-uno').append(`${e.restaurant.user_rating.aggregate_rating}`);
+                			abierto = true;
+              			}else {
+							$('#name-rest-dos').empty();
+							$('#name-rest-dos').append(`${e.restaurant.name}`);
+							$('#cocina-dos').empty();
+							$('#cocina-dos').append(`${e.restaurant.cuisines}`);
+							$('#costo-dos').empty();
+							$('#costo-dos').append(`${e.restaurant.average_cost_for_two}`);
+							$('#valor-dos').empty();
+							$('#valor-dos').append(`${e.restaurant.user_rating.aggregate_rating}`);
+                			abierto = false;
+              			}
+              			$('.close').click(function(){
+              				$('.footer-comparacion').addClass('hide');
+              			});
+					});
+
+
+                    $('#img-'+ e.restaurant.id).click(function(event){
+                    	$('.section-img-foter').removeClass('hide');
+                    	$('#imprimeFooter').empty();
+                    	$('#imprimeFooter').append(`
+                        	<div class="titleFooter center">
+                                <h6>${e.restaurant.name}</h6>
+                                <a href="#" class="heart" id="fav-${e.restaurant.id}"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                <a href="#" class="close">x</a>
+                            </div>
+                            <div class="row">
+	                            <div class="col s12">
+	                                <div class="datosFooter center-align">
+	                                    <h6>Adress</h6>
+	                                    <p>${e.restaurant.location.address}</p>
+	                                    <h6>Price</h6>
+	                                   	<p>${e.restaurant.average_cost_for_two}</p>
+	                                    <h6>Rating</h6>
+	                                    <p>${e.restaurant.user_rating.aggregate_rating}</p>
+	                                </div>
+	                            </div>
+                            </div>
+                        `);
+              			$('.close').click(function(){
+              				$('.section-img-foter').addClass('hide');
+              			});                        
+                    });
+
 	    		});
+	    		
 	    	})
 	    	.fail(function(error){
 	    		//console.log(error);
@@ -20298,5 +20475,4 @@ $(document).ready(function() {
 	        })				
 
 	});
-
 });
