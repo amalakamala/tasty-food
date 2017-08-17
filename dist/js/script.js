@@ -20255,7 +20255,6 @@ if (jQuery) {
 
 $(document).ready(function() {
 
-
 });
 $(document).ready(function() {
 	//$(".button-collapse").sideNav();
@@ -20387,4 +20386,8 @@ $(document).ready(function() {
 	        })				
 
 	});
+});
+
+$(document).ready(function() {
+	$(".button-collapse").sideNav();
 });
