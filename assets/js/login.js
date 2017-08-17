@@ -1,4 +1,5 @@
 /*Validación del login*/
+$(document).ready(function(){
     $(".ingresar").click(function(){
         var nuevoNom = $("#name2").val();
         var nuevoPass = $("#password2").val();
@@ -18,3 +19,4 @@
         } 
         return true;
     })
+});
