@@ -10253,9 +10253,42 @@ return jQuery;
 } );
 
 $(document).ready(function() {
-<<<<<<< HEAD
-	alert("hola mundo");
-=======
+	/*Validación de cuenta*/
+		var correo = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+		var contra = /^[0-9]+(\.[0-9])?$/;
 
->>>>>>> 8fb44cd1b588c6060bcd2dd42d547a7786bfdf79
+		$(".crear").click(function(){			
+
+			var nombre = $("#name").val(); 
+			var email = $("#email").val();
+        	var pass = $("#password").val();
+
+        	if(nombre == "" || nombre == contra){
+            $("#mensaje").fadeIn("slow");           
+                return false;
+        	}else{
+            	$("#mensaje").fadeOut();
+        	}
+
+        	if(email == "" || !correo.test(email)){
+            	$("#mensaje1").fadeIn("slow");
+                return false;
+        	}else{
+            	$("#mensaje1").fadeOut();
+        	}
+
+        	if(pass == "" || !contra.test(pass)){
+            	$("#mensaje2").fadeIn("slow");
+                return false;
+        	}else{
+            	$("#mensaje2").fadeOut();
+        	} 
+
+        	return true; 
+		})
+
+	/*Fin validación de cuenta*/
+});
+$(document).ready(function() {
+	$(".button-collapse").sideNav();
 });
