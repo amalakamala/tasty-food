@@ -1,0 +1,140 @@
+.select-buscador{
+	background-color: #E5E5E5;
+	height: auto;
+	padding: 20px 0 10px;
+}
+
+.resultados-buscador{
+	padding: 20px 0;
+	margin:10px 0;
+	.caja-resultados{
+		img{
+			border-radius: 6px;
+    		margin:0;
+    		width:100vh;
+    		height: 80px;
+		}
+		.texto-resultado{
+			background-color: #FF721A;
+			position: relative;
+    		top: -25px;
+			border-bottom-left-radius: 6px;
+    		border-bottom-right-radius: 6px;
+    		padding: 5px 2px;
+    		.row{
+    			margin:0;
+    			line-height:5px;
+	    		.col-resultado{
+	    			padding-left: 3px;
+	    			padding-right: 0;
+	    			margin:0;
+	    			p{
+		    			color: #FFF;
+		    			margin: 2px;
+		    			font-size: 7px;
+		    		}
+		    		.nombre-ubicacion{
+		    			font-size: 6px;
+		    			font-weight: 100;
+		    		}
+		    		.fa-cutlery{
+		    			color: #FFF;
+		    			font-size: 7px;
+		    		}
+	    		}    			
+    		}
+		}
+	}
+}
+
+.section-fixed{
+    position: fixed;
+    background-color: #E5E5E5;
+    width: 100vw;
+    height: 230px;
+    z-index: 9999;
+    bottom: 0;
+    padding: 30px 14px;
+    .close{
+    	position: relative;
+    	top: -20px;
+    	left: 330px;
+ 		color: #FF721A;
+    }
+    .close:hover{
+    	color: #FFF;
+    }
+    .la-table{
+    	font-size: 11px;
+    	width: 320px;
+    	thead{
+	    	th{
+	    		padding: 5px;
+	    	}
+	    	.rest-table{
+	    		background-color:#FF721A;
+	    		color: #FFF;
+	    		font-weight: 200;
+	    	}	
+    	}
+    	tbody{
+	    	td{
+	    		padding:10px 5px;
+	    		.fa-circle{
+	    			font-size: 12px;
+	    			color: #FF721A;
+	    		}
+	    	}
+    	}
+    }
+}
+
+.section-img-foter{
+    position: fixed;
+    background-color: #E5E5E5;
+    width: 100vw;
+    height: 230px;
+    z-index: 9999;
+    bottom: 0;
+    padding:0;	
+	.titleFooter{
+    	background-color:#FF721A;
+    	color: #FFF;
+		font-weight:200;
+	    .close{
+		    position: relative;
+		    top: -35px;
+		    left: 150px;
+		    color: #FFF;
+	    }
+	    .close:hover{
+	    	color: #E5E5E5;
+	    }		
+		h6{
+			margin-top:0;
+			padding-top:20px;
+			margin-bottom: 0px;
+			font-size:20px;
+			font-weight:200;
+		}
+		.heart{
+			color: #FFF;
+			position: relative;
+		    top: -30px;
+		    right: 150px;
+		}
+		.heart:hover{
+	    	color: #E5E5E5;
+	    }		
+	}
+    .datosFooter{
+    	padding:5px;
+    	h6{
+    		margin:0;
+    		font-weight:600;
+    	}
+    	p{
+    		margin:5px;
+    	}
+    }	
+}

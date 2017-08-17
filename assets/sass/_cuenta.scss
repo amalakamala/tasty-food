@@ -1,0 +1,62 @@
+nav{
+	height: 39px;
+	.button-back-page{
+		height: auto;
+		padding-left: 20px;
+		.icon-back-page{
+			font-size: x-large;
+		}
+	}
+	.name-page-nav{
+	    position: relative;
+	    left: 30%;			
+	}
+	.buttom-enlaces-nav{	
+		margin-left: 60%;
+		.icon-enlaces-nav{
+			font-size: x-large;
+		}
+	}
+}
+#cuenta-section{
+	height: 100vh;
+	.first-column-cuenta{
+		.title-cuenta{
+			font-family: 'Teko', sans-serif;
+			font-weight: 900;
+			font-size: -webkit-xxx-large;
+			color: #ef6c00!important;
+			margin-top: 20%;
+			margin-bottom: 0;
+		}
+		.subtitle-cuenta{
+			margin-top: 0;
+			font-size: x-small;
+		}
+		.crear{
+			border: none;
+			border-radius: 5px;
+			width: 100%;
+			padding: 10px;
+			font-size: 12px;
+		}
+		input{
+			border: 1px solid #d1d1d1;
+			border-radius: 2px;
+		}
+		#name{
+			margin-top: 15%;
+		}
+	}
+}
+.errores{
+   	background: red;
+    color: #fff;
+    display: none;
+    font-size: 14px;
+    margin-top: -22px;
+    margin-left: 150px;
+    padding: 1px;
+    position: absolute;
+    width: 50%;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TastyFood</title>
+	<!--viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
+	<!-- ICON material -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Fontawesome -->
+	<script src="https://use.fontawesome.com/b5fd719f9b.js"></script>
+	<!--favicon-->
+	<link rel="icon" href="dist/img/favicon.ico" type="image/x-icon"/>
+	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
+</head>
+<body>
+	<section class="container-fluid">
+        <nav class="orange darken-3">
+            <div class="nav-wrapper valign-wrapper">
+                <a href="cuenta.html" data-activates="mobile-demo" class="button-back-page"><i class="material-icons icon-back-page">arrow_back</i></a>
+                <a href="#!" class="name-page-nav center-align">SEARCH</a>
+                <a href="#" data-activates="mobile-demo" class="buttom-enlaces-nav button-collapse right"><i class="material-icons icon-enlaces-nav">dehaze</i></a>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="search.html"><i class="fa fa-search" aria-hidden="true"></i>Search</a></li>
+                    <li><a href="discover.html"><i class="fa fa-globe" aria-hidden="true"></i>Discover</a></li>
+                    <li><a href="perfil.html"><i class="fa fa-user-circle" aria-hidden="true"></i>Profile</a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+	<!-- Select -->
+	<section class="select-buscador">
+		<div class="row">
+			<div class="col s12">
+				<select class="browser-default" id="select-city">
+					<option value="" selected disabled>Seleccionar</option>
+					<option value="83">Santiago</option>
+					<option value="73">Río Janeiro</option>
+					<option value="67">Sao Paulo</option>
+					<option value="257">Roma</option>
+					<option value="280">New York</option>
+					<option value="91">Dublin</option>
+		  		</select>		
+			</div>
+		</div>	
+	</section>
+	<!-- Select Resultados -->
+	<section class="resultados-buscador">
+		<div class="row">
+			<div class="imprime"></div>
+				<!-- AQUÍ IMPRIME LA API -->
+			</div>
+		</div>
+	</section>
+	<!-- footer -->
+	<section class="footer-comparacion hide">
+		<div class="section-fixed">
+			<div class="row">
+				<a href="#" class="close">x</a>
+				<div class="col s12 center">
+					<table class="la-table">
+						<thead>
+							<tr>
+								<th></th>
+								<th class="rest-table center" id="name-rest-uno"></th>
+								<th class="rest-table center" id="name-rest-dos"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="white"><i class="fa fa-circle" aria-hidden="true"></i> Cuisine</td>
+								<td class="white center" id="cocina-uno"></td>
+								<td class="white center" id="cocina-dos"></td>
+							</tr>
+							<tr>
+								<td class="white"><i class="fa fa-circle" aria-hidden="true"></i> Cost for two</td>
+								<td class="white center" id="costo-uno"></td>
+								<td class="white center" id="costo-dos"></td>
+							</tr>
+							<tr>
+								<td class="white"><i class="fa fa-circle" aria-hidden="true"></i> Rate</td>
+								<td class="white center" id="valor-uno"></td>
+								<td class="white center" id="valor-dos"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>			
+	</section>
+	<!-- IMG -->
+	<section class="section-img-foter hide">
+			<div id="imprimeFooter">	
+						
+			</div>			
+	</section>
+	<!--JS-->
+	<script src="dist/js/script.js"></script>
+</body>
+</html>
