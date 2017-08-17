@@ -10251,7 +10251,3 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
-
-$(document).ready(function() {
-	alert("hola");
-});
