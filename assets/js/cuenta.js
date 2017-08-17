@@ -33,6 +33,7 @@ $(document).ready(function() {
             $("#mensaje2").fadeOut();
             localStorage.setItem('contra', pass);/*ingreso de datos al local storage*/
             console.log(pass);
+            $("#btn-crear").attr("href","login.html");
         } 
         return true; 
         $("#name").val(""); 
