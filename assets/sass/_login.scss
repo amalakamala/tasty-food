@@ -15,9 +15,46 @@ nav{
 	}
 }
 #login-section{
+	height: 100vh;
 	.first-column-login{
 		.title-login{
-			
+			font-family: 'Teko', sans-serif;
+			font-weight: 900;
+			font-size: -webkit-xxx-large;
+			color: #ef6c00!important;
+			margin-top: 20%;
+			margin-bottom: 0;
+		}
+		.button-ingresar{
+			border: none;
+			border-radius: 5px;
+			width: 100%;
+			padding: 6px;
+			font-size: 12px;
+			margin-top: 10%;
+		}
+		.ingresar{
+			font-size: 18px;
+			letter-spacing: 4px;
+		}
+		input{
+			border: 1px solid #d1d1d1;
+			border-radius: 2px;
+		}
+		p{
+			color: #ef6c00!important;
+			float: left;
 		}
 	}
+}
+.errores{
+   	background: red;
+    color: #fff;
+    display: none;
+    font-size: 14px;
+    margin-top: -22px;
+    margin-left: 130px;
+    padding: 1px;
+    position: absolute;
+    width: 50%;
 }
