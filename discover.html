@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Discover</title>
+	<!--viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- ICON material -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Fontawesome -->
+	<script src="https://use.fontawesome.com/b5fd719f9b.js"></script>
+	<!--favicon-->
+	<link rel="icon" href="dist/img/favicon.ico" type="image/x-icon"/>
+	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="dist/css/style.min.css">
+</head>
+<body>
+
+	<section class="container-fluid">
+        <nav class="orange darken-3">
+            <div class="nav-wrapper valign-wrapper">
+                <a href="#" data-activates="mobile-demo" class="button-back-page"><i class="material-icons icon-back-page">arrow_back</i></a>
+                <a href="#!" class="name-page-nav center-align">SEARCH</a>
+                <a href="#" data-activates="mobile-demo" class="buttom-enlaces-nav button-collapse right"><i class="material-icons icon-enlaces-nav">dehaze</i></a>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                </ul>
+            </div>
+        </nav>
+	</section>
+
+	<section class="select-buscador-cuisines">
+		<div class="row">
+			<div class="col s12">
+				<select class="browser-default" id="select-cuisines">
+					<option value="" selected disabled>Seleccionar</option>
+					<option value="Italian">Italian</option>
+					<option value="Burger">Burger</option>
+					<option value="Thai">Thai</option>
+					<option value="Pizza">Pizza</option>
+					<option value="Sandwich">Sandwich</option>
+					<option value="French">French</option>
+					<option value="Cafe">Cafe</option>
+					<option value="Bar Food">Bar Food</option>
+		  		</select>		
+			</div>
+		</div>
+
+		<div id="map"></div>	
+		<div class="imprimeme"></div>
+	</section>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8NJ27kOEU4bvrn1_cn814Xrrn_Rxn_fw&libraries=places&callback=initMap"
+  type="text/javascript"></script>
+	<script src="dist/js/script.js"></script>
+
+</body>
+</html>
