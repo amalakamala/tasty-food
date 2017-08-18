@@ -1,14 +1,15 @@
 $(document).ready(function() {
 	$(".button-collapse").sideNav();
 
+	var arr = [];
+
 	$('#select-city').on('change',function(){
 		//La ciudad será variabla por eso se ingresa lo del select
 		var ciudad =  $('#select-city').val() ;
 		console.log(ciudad);
 		var cousine = "italian";
-		var apiKey = '6cc3db9f6f73c4a770e8ddde5284d1fb'; 
+		var apiKey = '93613eee429983e2e15aae0a2ecd87d1'; 
 		//var entityId = '83';
-
 		/*------- Callbacks -------*/
 	    	$.ajax({
 	    		url:'https://developers.zomato.com/api/v2.1/search',
@@ -22,14 +23,14 @@ $(document).ready(function() {
 	      			'entity_id' : ciudad,
 	      			'entity_type': 'city'
 	      			//'cuisines' : cousine
-	      			//'cuisines' esta comentado, porque deseo que me traiga todo indiferente el tipo.
-	      			
+	      			//'cuisines' esta comentado, porque deseo que me traiga todo indiferente el tipo.	
 	      		}
 	    	})
 	    	.done(function(response){
 	    		//console.log(response);
 	    		//.empty() me borra lo anterior para realizar una nueva busqueda
 	    		$('.imprime').empty();
+	    		$('.text-relleno').addClass('hide');
 	    		response.restaurants.forEach(function(e){
 	    			//console.log(e.restaurant); 
 	    			//console.log(e.restaurant.name); 
@@ -56,12 +57,12 @@ $(document).ready(function() {
 							</div>
 						</div>
 	    			`);
-
 	    			/* COMPARAR PRECIOS */
 	    			//ACÁ LLAMO POR EL ID
 	    			var abierto = false;
-					$('#btn-'+e.restaurant.id).click(function(){
-						 if (!abierto) {
+					$('#btn-'+e.restaurant.id).click(function(event){
+						event.preventDefault();
+						if (!abierto) {
 							$('.footer-comparacion').removeClass('hide');
 							$('#name-rest-uno').empty();
 							$('#name-rest-uno').append(`${e.restaurant.name}`);
@@ -83,20 +84,29 @@ $(document).ready(function() {
 							$('#valor-dos').append(`${e.restaurant.user_rating.aggregate_rating}`);
                 			abierto = false;
               			}
+              			/*CERAR PESTAÑA*/
               			$('.close').click(function(){
               				$('.footer-comparacion').addClass('hide');
               			});
 					});
-
-
+					/* Destalles de Restaurant */
                     $('#img-'+ e.restaurant.id).click(function(event){
+                    	event.preventDefault();
                     	$('.section-img-foter').removeClass('hide');
                     	$('#imprimeFooter').empty();
                     	$('#imprimeFooter').append(`
                         	<div class="titleFooter center">
-                                <h6>${e.restaurant.name}</h6>
-                                <a href="#" class="heart" id="fav-${e.restaurant.id}"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a href="#" class="close">x</a>
+                        		<div class="row">
+                        		    <div class="col s1">
+                        		        <a href="#" class="heart" id="fav-${e.restaurant.id}" value="${e.restaurant.name}"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                        			</div>
+                        			<div class="col s10">
+										<h6>${e.restaurant.name}</h6>                        			
+									</div>
+                        			<div class="col s1">
+										<a href="#" class="close">x</a>                       			
+									</div>									
+                        		</div>
                             </div>
                             <div class="row">
 	                            <div class="col s12">
@@ -111,13 +121,22 @@ $(document).ready(function() {
 	                            </div>
                             </div>
                         `);
+                    	/* --- Agregar Restaurant a Fav --- */
+                    	$('#fav-' + e.restaurant.id).click(function(event){
+                    		event.preventDefault();
+                    		$(this).addClass('hide');
+                    		console.log(e.restaurant.name);
+                    		var fav = '"' + $(this).attr('value')+ '"';
+                    		arr.push(fav);
+                    		console.log(fav);
+                    		localStorage.setItem('restaurant-favoritos',arr);
+                   		});	
+                   		/*CERAR PESTAÑA*/
               			$('.close').click(function(){
               				$('.section-img-foter').addClass('hide');
-              			});                        
+              			});   
                     });
-
 	    		});
-	    		
 	    	})
 	    	.fail(function(error){
 	    		//console.log(error);
@@ -126,6 +145,17 @@ $(document).ready(function() {
 	        .always(function() {
 	            console.log('OK');
 	        })				
-
 	});
+	/* --- Agregar Restaurant Fav a Arreglo --- */
+    var str = JSON.parse('[' + localStorage.getItem('restaurant-favoritos') + ']');
+    console.log(str);
+    str.forEach(function(e){
+    	$('#los-favoritos').append(`
+			<div class="col s4">
+				<div class="caja center">
+					<p>`+ e +`</p>
+				</div>
+			</div>
+    	`);
+    });
 });
