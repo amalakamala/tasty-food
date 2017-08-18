@@ -29,27 +29,28 @@
             </div>
         </nav>
     </section>
-	<section id="imagen-perfil-section" class="grey lighten-2 container-fluid">
-		<div class="row first-row-perfil">
-			<div class="col s12 first-column-perfil">
-				<!--cargar imagen-->
-				<div id="box">
-					<img src="#" class="perf_ima"/>
-				</div>
-				<button class="orange darken-3 white-text button-upload modal-trigger">Upload photo</button>
-				<div class="modal-upload">
-					<span class="errores" id="info">No hay archivo aún</span>
-						<form id="file-submit" enctype="multipart/form-data">
-							<input id="file" name="file" type="file"/>
-						</form>
-						<a href="#" class="btn orange darken-3" id="guardar">Guardar</a>
-				</div>	
-			</div>
-		</div>
-	</section>
-	<section id="perfil-section" class="grey lighten-2 container-fluid">
+	<!-- CARGA IMG -->
+	<section> 
+        <div class="row">
+            <div class="imagen-profile center col s12">
+                <img id="photo" class="perf_ima">
+            </div>
+        </div>
+    </section>
+    <form action="#" class="btns-subir-foto">
+        <div class="btn  file">
+            <a id="btn-upload" class="darken-3">Subir Foto</a>
+        </div>
+        <input type="file" id="files" name="files[]" multiple />
+    </form>
+    
+    <div class="col s2 col m8 s8 center-align box2">        
+        <div class="btn  file">
+            <a id="sign-session">Save</a>
+        </div>        
+    </div>
 	<!--Cajas contenedoras de los datos del usuario-->
-		<div class="row">
+		<div class="row grey lighten-2" id="perfil-section">
 			<div class="col s12 center">
 				<div class="box-a white"></div>
 				<div class="box-b white"></div>
