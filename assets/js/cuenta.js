@@ -34,7 +34,7 @@ $(document).ready(function() {
             $("#mensaje2").fadeOut();
             localStorage.setItem('contra', pass);/*ingreso de datos al local storage*/
             console.log(pass);
-            $("#btn-crear").attr("href","search.html");
+            $("#btn-crear").attr("href","login.html");
         } 
         return true; 
         $("#name").val(""); 
@@ -46,11 +46,10 @@ $(document).ready(function() {
     var nombre2 = localStorage.getItem('nom'); /*llamada del los datos guardados en el local storage*/
     var email2 = localStorage.getItem('correo'); /*llamada del los datos guardados en el local storage*/
     var pass2 = localStorage.getItem('contra'); /*llamada del los datos guardados en el local storage*/
-    /*
-    Así puedes dejar pre llenado los campos de ingreso de login: 
+
+
     $('#name2').val(localStorage.getItem('nom'));
     $('#password2').val(localStorage.getItem('contra'));
-    */
     /*Validación del login*/
     $(".ingresar").click(function(){
         var nuevoNom = $("#name2").val();
@@ -68,6 +67,7 @@ $(document).ready(function() {
         }else{
             $("#mensaje4").fadeOut();
             console.log(nuevoPass, pass2);
+            $(".ingresar").attr("href","search.html");
         } 
         return true;
     })
@@ -76,7 +76,7 @@ $(document).ready(function() {
     box-a y box-b*/
     $(".box-a").append(nombre2);
     $(".box-b").append(email2);
-    /**Parte de subir imagen**/
+    /**------PARTE DE SUBIR IMG------**/
     $('#seleccion').click(function(e){
         e.preventDefault();    
         $('#file').click();
