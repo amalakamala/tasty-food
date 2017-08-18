@@ -76,19 +76,4 @@ $(document).ready(function() {
     box-a y box-b*/
     $(".box-a").append(nombre2);
     $(".box-b").append(email2);
-    /**------PARTE DE SUBIR IMG------**/
-    $('#seleccion').click(function(e){
-        e.preventDefault();    
-        $('#file').click();
-    })
-    $('input[type=file]').change(function(){
-        var file = (this.files[0]);
-        var reader = new FileReader();
-        $('#info').text('');
-        $('#info').text(file);
-        reader.onload = function(e){
-            $('#box img').attr('src', e.target.result);         
-        }
-        reader.readAsDataURL(this.files[0]);
-    })
 });
