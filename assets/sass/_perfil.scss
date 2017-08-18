@@ -30,36 +30,34 @@ nav{
     padding: 5px;
     position: absolute;
 }
-#imagen-perfil-section{
-	.first-row-perfil{
-		margin: 0;
-		.first-column-perfil{
-			padding: 0;
-			#box{
-				height: 25vh;
-				.perf_ima{ 
-					width: 100%;
-					height: 25vh;
-				}
-			}
-			.button-upload{
-				width: 100%;
-				border: none;
-				padding: 5px;
-			}
-			.modal-upload{
-				#file-submit{
-					margin-left: 20%;
-				}
-				#guardar{
-					width: 80%;
-					margin-left: 10%;
-				}
-			}
-		}
+
+.btns-subir-foto{
+	.file{
+		position:relative;
+		left: 32%;	
+		background-color:$naranjo;
+		#btn-upload{
+			color: #FFF;
+		}		
+	}
+	#files{
+		position: relative;
+    	left: 10%;
 	}
 }
+
+.box2{	
+	.file{
+		background-color:$naranjo;
+		a{
+			color: #FFF;
+		}
+	}		
+}
+
+
 #perfil-section{
+	margin: 10px 0;
 	height: 30vh;
 	.box-a{
 		border-radius: 4px;
@@ -78,5 +76,16 @@ nav{
 	.title-favorites{
 		margin-top: 8vh;
 		letter-spacing: 2px;
+	}
+}
+
+#los-favoritos{
+	padding:10px 0;
+	.caja{
+		background-color:$naranjo;
+		padding: 1px 5px;
+		color:#FFF;
+		font-size: 10px;
+		margin-bottom: 10px;
 	}
 }
