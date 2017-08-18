@@ -20333,8 +20333,6 @@ $(document).ready(function() {
     $(".box-b").append(email2);
 });
 
-
-
 function initMap() {
     $(document).ready(function() {
 
@@ -20461,6 +20459,7 @@ function initMap() {
 
     });
 }
+
 var photo_url = ''; //save pictures
 $(document).ready(function () {
    $("#btn-upload").click(handleFileSelect);//handleFileSelect, extract the files on input
@@ -20504,6 +20503,7 @@ function handleFileSelect() {
        reader.readAsDataURL(file);
    }
 }
+
 $(document).ready(function() {
     $(".modal-upload").hide();
     $("#guardar").click(function() {
@@ -20513,6 +20513,7 @@ $(document).ready(function() {
         $(".modal-upload").show();
     })    
 });
+
 $(document).ready(function() {
 	$(".button-collapse").sideNav();
 
