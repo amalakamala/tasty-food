@@ -44,6 +44,12 @@ nav{
 			border: 1px solid #d1d1d1;
 			border-radius: 2px;
 		}
+		input[type=text]:not(.browser-default):focus:not([readonly]),
+		input[type=email]:not(.browser-default):focus:not([readonly]){
+			border-bottom: 1px solid $naranjo;
+			-webkit-box-shadow: 0 1px 0 0 $naranjo;
+	    	box-shadow: 0 1px 0 0 $naranjo;
+		}
 		#name{
 			margin-top: 15%;
 		}
