@@ -7,6 +7,12 @@
 .resultados-buscador{
 	padding: 20px 0;
 	margin:10px 0;
+	.text-relleno{
+		color: #FF721A;
+		.img-relleno{
+			width:200px;
+		}
+	}
 	.caja-resultados{
 		img{
 			border-radius: 6px;
@@ -102,26 +108,23 @@
     	color: #FFF;
 		font-weight:200;
 	    .close{
-		    position: relative;
-		    top: -35px;
-		    left: 150px;
 		    color: #FFF;
+		    position: relative;
+    		top: 10px;
 	    }
 	    .close:hover{
 	    	color: #E5E5E5;
 	    }		
 		h6{
 			margin-top:0;
-			padding-top:20px;
-			margin-bottom: 0px;
+			padding:10px 0;
 			font-size:20px;
 			font-weight:200;
 		}
 		.heart{
-			color: #FFF;
 			position: relative;
-		    top: -30px;
-		    right: 150px;
+    		top: 10px;
+			color: #FFF;
 		}
 		.heart:hover{
 	    	color: #E5E5E5;
