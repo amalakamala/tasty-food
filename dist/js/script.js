@@ -20289,7 +20289,7 @@ $(document).ready(function() {
             $("#mensaje2").fadeOut();
             localStorage.setItem('contra', pass);/*ingreso de datos al local storage*/
             console.log(pass);
-            $("#btn-crear").attr("href","search.html");
+            $("#btn-crear").attr("href","login.html");
         } 
         return true; 
         $("#name").val(""); 
@@ -20301,11 +20301,10 @@ $(document).ready(function() {
     var nombre2 = localStorage.getItem('nom'); /*llamada del los datos guardados en el local storage*/
     var email2 = localStorage.getItem('correo'); /*llamada del los datos guardados en el local storage*/
     var pass2 = localStorage.getItem('contra'); /*llamada del los datos guardados en el local storage*/
-    /*
-    Así puedes dejar pre llenado los campos de ingreso de login: 
+
+
     $('#name2').val(localStorage.getItem('nom'));
     $('#password2').val(localStorage.getItem('contra'));
-    */
     /*Validación del login*/
     $(".ingresar").click(function(){
         var nuevoNom = $("#name2").val();
@@ -20323,6 +20322,7 @@ $(document).ready(function() {
         }else{
             $("#mensaje4").fadeOut();
             console.log(nuevoPass, pass2);
+            $(".ingresar").attr("href","search.html");
         } 
         return true;
     })
@@ -20331,62 +20331,179 @@ $(document).ready(function() {
     box-a y box-b*/
     $(".box-a").append(nombre2);
     $(".box-b").append(email2);
-    /**Parte de subir imagen**/
-    $('#seleccion').click(function(e){
-        e.preventDefault();    
-        $('#file').click();
-    })
-    $('input[type=file]').change(function(){
-        var file = (this.files[0]);
-        var reader = new FileReader();
-        $('#info').text('');
-        $('#info').text(file);
-        reader.onload = function(e){
-            $('#box img').attr('src', e.target.result);         
+});
+
+
+
+function initMap() {
+    $(document).ready(function() {
+
+    	$(".button-collapse").sideNav();
+
+        var cuisine = "";
+        var apiKey = '93613eee429983e2e15aae0a2ecd87d1';
+        var latitud = -33.4573805;
+        var longitud = -70.5939723;
+        var zoom = 14;
+        var map = new google.maps.Map(document.getElementById("map"));
+        resetMap();
+
+        selectCocinerias(apiKey);
+        onMap(apiKey);
+
+        $(".select-buscador-cuisines select").on("change", function(){
+            cuisine = $(this).val();
+            resetMap();
+        });
+
+        function resetMap() {
+            map = new google.maps.Map(document.getElementById("map"),{
+                zoom: zoom,
+                center: {lat: latitud, lng: longitud},
+                mapTypeControl: true,
+                zoomControl: true,
+                streetViewControl: true
+            });
+
+            google.maps.event.addListener(map, 'zoom_changed', function() {
+                zoom = map.getZoom();
+            });
+
+            google.maps.event.addListener(map, 'idle', function(event){
+                latitud = map.getCenter().lat();
+                longitud = map.getCenter().lng();
+            });
+
+            onMap(apiKey);
         }
-        reader.readAsDataURL(this.files[0]);
-    })
+//Llamamos a la seccion de cocinerias y llenamos el select con las existentes
+        function selectCocinerias(apiKey) {
+            var url = 'https://developers.zomato.com/api/v2.1/cuisines?';
+            
+            $.ajax({
+                url: url,
+                type: 'GET',
+                beforeSend: function(request) {
+                    request.setRequestHeader("user-key", apiKey);
+                },
+                dataType: 'json',
+                data: {
+                    'lat': latitud,
+                    'lon': longitud
+                }
+            })
+            .done(function(response){
+                response.cuisines.forEach(function(single) {
+                    var id = single.cuisine.cuisine_id;
+                    var cuisine = single.cuisine.cuisine_name;
+                    //Aqui se toman y se ponen detro de las opciones
+                    var option = `<option value="${id}">${cuisine}</option>`;
+                    $(".select-buscador-cuisines select").append(option);
+                })
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+//Funcion que busca los locales por tipo
+        function onMap(apiKey) {
+            var url = 'https://developers.zomato.com/api/v2.1/search?';
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                beforeSend: function(request) {
+                    request.setRequestHeader("user-key", apiKey);
+                },
+                dataType: 'json',
+                data: {
+                    'lat': latitud,
+                    'lon': longitud,
+                    'entity_id' : "83",
+                    'cuisines': cuisine
+                }
+            })
+            .done(function(response){
+                response.restaurants.forEach(function(single) {
+                    var lat = single.restaurant.location.latitude;
+                    var lon = single.restaurant.location.longitude;
+                    pinLocal(lat, lon);
+                })
+            })
+            .fail(function() {
+                console.log("error");
+            })
+        }
+//Pin que marca el local
+        function pinLocal(lat, lon) {
+            var marker = pin(map);
+            marker.setPosition(new google.maps.LatLng(lat,lon));
+            marker.setVisible(true);
+        }
+//Creando el pin con sus valores
+        function pin(map) {
+            var icono = {
+                url: 'dist/img/icon.png',
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(35, 35)
+            };
+
+            var marker = new google.maps.Marker({
+                map: map,
+                icon: icono,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            return marker;
+        }
+
+    });
+}
+var photo_url = ''; //save pictures
+$(document).ready(function () {
+   $("#btn-upload").click(handleFileSelect);//handleFileSelect, extract the files on input
+   $("#sign-session").click(saveToLocalStorage); //guarda a local storage
+   getFromLocalStorage(); //obtener local storage
 });
-
-
-$(document).ready(function() {
-/*RAMA PERFIL*/
-	/*Validación de cuenta*/
-		var correo = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-		var contra = /^[0-9]+(\.[0-9])?$/;
-
-		$(".crear").click(function(){			
-
-			var nombre = $("#name").val(); 
-			var email = $("#email").val();
-        	var pass = $("#password").val();
-
-        	if(nombre == "" || nombre == contra){
-            $("#mensaje").fadeIn("slow");           
-                return false;
-        	}else{
-            	$("#mensaje").fadeOut();
-        	}
-
-        	if(email == "" || !correo.test(email)){
-            	$("#mensaje1").fadeIn("slow");
-                return false;
-        	}else{
-            	$("#mensaje1").fadeOut();
-        	}
-
-        	if(pass == "" || !contra.test(pass)){
-            	$("#mensaje2").fadeIn("slow");
-                return false;
-        	}else{
-            	$("#mensaje2").fadeOut();
-        	} 
-
-        	return true; 
-		})
-
-	/*Fin validación de cuenta*/
-});
+//This function save to local storage
+function saveToLocalStorage() {
+   if (typeof (Storage) !== "undefined") {//soporte del navegador
+       if (photo_url != '') {//si la foto es diferente de vacìo
+           localStorage.setItem('photo', photo_url);
+       }         
+   } else {
+       //No hay soporte de navegador
+       console.log('Sorry there is not support for local storage.')
+   }
+}
+function getFromLocalStorage() {
+   console.log('getting info for: ' + localStorage.getItem('#photo'));
+   $('#photo').attr('src', localStorage.getItem('photo'));
+}
+//Function to save images in local storage
+function handleFileSelect() {
+   var files = $('#files')[0].files;
+   // Gets the image selected on input and assign them to image. Get from https://www.html5rocks.com/en/tutorials/file/dndfiles/
+   for (var i = 0, file; file = files[i]; i++) {
+       // Si la imagen coincide, proseguir
+       if (!file.type.match('image.*')) {
+           continue;
+       }
+       var reader = new FileReader(); //object js to process the image
+       // when load image
+       reader.onload = (function (theFile) {
+           return function (e) {
+               // Render thumbnail.
+               $('#photo').attr('src', e.target.result);//assign the image to the function
+               photo_url = e.target.result;
+           };
+       })(file);
+       // lee la imagen como una URL
+       reader.readAsDataURL(file);
+   }
+}
 $(document).ready(function() {
     $(".modal-upload").hide();
     $("#guardar").click(function() {
@@ -20394,69 +20511,20 @@ $(document).ready(function() {
     });
     $(".button-upload").click(function(){
         $(".modal-upload").show();
-    })
-    /*local storage*/
-    /*** Acá llamas local storage pero se puede poner de inmediato el el value de los input de cuenta ***/
-    var nombre2 = localStorage.getItem('nom'); /*llamada del los datos guardados en el local storage*/
-    var email2 = localStorage.getItem('correo'); /*llamada del los datos guardados en el local storage*/
-    var pass2 = localStorage.getItem('contra'); /*llamada del los datos guardados en el local storage*/
-    /*
-    Así puedes dejar pre llenado los campos de ingreso de login: 
-    $('#name2').val(localStorage.getItem('nom'));
-    $('#password2').val(localStorage.getItem('contra'));
-    */
-    /*Validación del login*/
-    $(".ingresar").click(function(){
-        var nuevoNom = $("#name2").val();
-        var nuevoPass = $("#password2").val();
-        if(nuevoNom != nombre2){
-             $("#mensaje3").fadeIn("slow");          
-               return false;
-        }else{
-            $("#mensaje3").fadeOut();
-            console.log(nuevoNom, nombre2);
-        } 
-        if(nuevoPass != pass2){
-             $("#mensaje4").fadeIn("slow");          
-               return false;
-        }else{
-            $("#mensaje4").fadeOut();
-            console.log(nuevoPass, pass2);
-        } 
-        return true;
-    })
-    /*Agregado de los datos en perfil*/
-    /* Se imprime por pantalla en el index llamado perfil, los datos del nombre y del correo del usuario en los div con clase
-    box-a y box-b*/
-    $(".box-a").append("Nombre: "+nombre2);
-    $(".box-b").append("Email: "+email2);
-    /**Parte de subir imagen**/
-    $('#seleccion').click(function(e){
-        e.preventDefault();    
-        $('#file').click();
-    })
-    $('input[type=file]').change(function(){
-        var file = (this.files[0]);
-        var reader = new FileReader();
-        $('#info').text('');
-        $('#info').text(file);
-        reader.onload = function(e){
-            $('#box img').attr('src', e.target.result);         
-        }
-      reader.readAsDataURL(this.files[0]);
-    })
+    })    
 });
-/*RAMA PERFIL FIN*/
+$(document).ready(function() {
 	$(".button-collapse").sideNav();
+
+	var arr = [];
 
 	$('#select-city').on('change',function(){
 		//La ciudad será variabla por eso se ingresa lo del select
 		var ciudad =  $('#select-city').val() ;
 		console.log(ciudad);
 		var cousine = "italian";
-		var apiKey = '6cc3db9f6f73c4a770e8ddde5284d1fb'; 
+		var apiKey = '93613eee429983e2e15aae0a2ecd87d1'; 
 		//var entityId = '83';
-
 		/*------- Callbacks -------*/
 	    	$.ajax({
 	    		url:'https://developers.zomato.com/api/v2.1/search',
@@ -20470,14 +20538,14 @@ $(document).ready(function() {
 	      			'entity_id' : ciudad,
 	      			'entity_type': 'city'
 	      			//'cuisines' : cousine
-	      			//'cuisines' esta comentado, porque deseo que me traiga todo indiferente el tipo.
-	      			
+	      			//'cuisines' esta comentado, porque deseo que me traiga todo indiferente el tipo.	
 	      		}
 	    	})
 	    	.done(function(response){
 	    		//console.log(response);
 	    		//.empty() me borra lo anterior para realizar una nueva busqueda
 	    		$('.imprime').empty();
+	    		$('.text-relleno').addClass('hide');
 	    		response.restaurants.forEach(function(e){
 	    			//console.log(e.restaurant); 
 	    			//console.log(e.restaurant.name); 
@@ -20504,12 +20572,12 @@ $(document).ready(function() {
 							</div>
 						</div>
 	    			`);
-
 	    			/* COMPARAR PRECIOS */
 	    			//ACÁ LLAMO POR EL ID
 	    			var abierto = false;
-					$('#btn-'+e.restaurant.id).click(function(){
-						 if (!abierto) {
+					$('#btn-'+e.restaurant.id).click(function(event){
+						event.preventDefault();
+						if (!abierto) {
 							$('.footer-comparacion').removeClass('hide');
 							$('#name-rest-uno').empty();
 							$('#name-rest-uno').append(`${e.restaurant.name}`);
@@ -20531,20 +20599,29 @@ $(document).ready(function() {
 							$('#valor-dos').append(`${e.restaurant.user_rating.aggregate_rating}`);
                 			abierto = false;
               			}
+              			/*CERAR PESTAÑA*/
               			$('.close').click(function(){
               				$('.footer-comparacion').addClass('hide');
               			});
 					});
-
-
+					/* Destalles de Restaurant */
                     $('#img-'+ e.restaurant.id).click(function(event){
+                    	event.preventDefault();
                     	$('.section-img-foter').removeClass('hide');
                     	$('#imprimeFooter').empty();
                     	$('#imprimeFooter').append(`
                         	<div class="titleFooter center">
-                                <h6>${e.restaurant.name}</h6>
-                                <a href="#" class="heart" id="fav-${e.restaurant.id}"><i class="fa fa-heart" aria-hidden="true"></i></a>
-                                <a href="#" class="close">x</a>
+                        		<div class="row">
+                        		    <div class="col s1">
+                        		        <a href="#" class="heart" id="fav-${e.restaurant.id}" value="${e.restaurant.name}"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                        			</div>
+                        			<div class="col s10">
+										<h6>${e.restaurant.name}</h6>                        			
+									</div>
+                        			<div class="col s1">
+										<a href="#" class="close">x</a>                       			
+									</div>									
+                        		</div>
                             </div>
                             <div class="row">
 	                            <div class="col s12">
@@ -20559,13 +20636,22 @@ $(document).ready(function() {
 	                            </div>
                             </div>
                         `);
+                    	/* --- Agregar Restaurant a Fav --- */
+                    	$('#fav-' + e.restaurant.id).click(function(event){
+                    		event.preventDefault();
+                    		$(this).addClass('hide');
+                    		console.log(e.restaurant.name);
+                    		var fav = '"' + $(this).attr('value')+ '"';
+                    		arr.push(fav);
+                    		console.log(fav);
+                    		localStorage.setItem('restaurant-favoritos',arr);
+                   		});	
+                   		/*CERAR PESTAÑA*/
               			$('.close').click(function(){
               				$('.section-img-foter').addClass('hide');
-              			});                        
+              			});   
                     });
-
 	    		});
-	    		
 	    	})
 	    	.fail(function(error){
 	    		//console.log(error);
@@ -20574,11 +20660,21 @@ $(document).ready(function() {
 	        .always(function() {
 	            console.log('OK');
 	        })				
-
 	});
+	/* --- Agregar Restaurant Fav a Arreglo --- */
+    var str = JSON.parse('[' + localStorage.getItem('restaurant-favoritos') + ']');
+    console.log(str);
+    str.forEach(function(e){
+    	$('#los-favoritos').append(`
+			<div class="col s4">
+				<div class="caja center">
+					<p>`+ e +`</p>
+				</div>
+			</div>
+    	`);
+    });
 });
 
- /*MASTER MERGE VANN*/
 $(document).ready(function() {
 	$(".button-collapse").sideNav();
 });
